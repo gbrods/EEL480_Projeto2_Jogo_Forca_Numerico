@@ -90,23 +90,23 @@ BEGIN
                     
                     ELSIF (V_SW(2) = '1' AND acerto(4) = '0') THEN
                         acerto(4) <= '1';		    
-                              next_state <= waiting_word;
+                        next_state <= waiting_word;
                     
                     ELSIF (V_SW(4) = '1' AND acerto(3) = '0') THEN
                         acerto(3) <= '1';			        
-                          next_state <= waiting_word;
+                        next_state <= waiting_word;
                     
                     ELSIF (V_SW(6) = '1' AND acerto(2) = '0') THEN
                         acerto(2) <= '1';			    
-                          next_state <= waiting_word;
+                        next_state <= waiting_word;
                     
                     ELSIF (V_SW(8) = '1' AND acerto(1) = '0') THEN
                         acerto(1) <= '1';			        
-                          next_state <= waiting_word;	
+                        next_state <= waiting_word;	
                     
                     ELSIF (V_SW(9) = '1' AND acerto(0) = '0') THEN
                         acerto(0) <= '1';			    
-                          next_state <= waiting_word;				        
+                        next_state <= waiting_word;				        
                     
                     ELSIF (V_SW(1) = '1' AND erro(0) = '0') THEN
                         erro(0) <= '1';
@@ -136,28 +136,28 @@ BEGIN
                 ELSIF (dificuldade = "10") THEN
                 
                     IF (V_SW(7) = '1' AND acerto(5) = '0') THEN
-                        acerto(5) <= '1';			        
+                        acerto(5) <= '1';
                         next_state <= waiting_word;
                     
                     ELSIF (V_SW(5) = '1' AND acerto(4) = '0') THEN
                         acerto(4) <= '1';		    
-                          next_state <= waiting_word;
+                        next_state <= waiting_word;
                     
                     ELSIF (V_SW(1) = '1' AND acerto(3) = '0') THEN
-                       acerto(3) <= '1';			        
-                          next_state <= waiting_word;
+                        acerto(3) <= '1';			        
+                        next_state <= waiting_word;
                     
                     ELSIF (V_SW(3) = '1' AND acerto(2) = '0') THEN
-                       acerto(2) <= '1';			    
-                          next_state <= waiting_word;
+                        acerto(2) <= '1';
+                        next_state <= waiting_word;
                     
                     ELSIF (V_SW(9) = '1' AND acerto(1) = '0') THEN
-                       acerto(1) <= '1';			        
-                          next_state <= waiting_word;	
+                        acerto(1) <= '1';			        
+                        next_state <= waiting_word;	
                     
                     ELSIF (V_SW(4) = '1' AND acerto(0) = '0') THEN
-                       acerto(0) <= '1';			    
-                          next_state <= waiting_word;	  
+                        acerto(0) <= '1';			    
+                        next_state <= waiting_word;	  
                         
                     ELSIF (V_SW(0) = '1' AND erro(0) = '0') THEN
                         erro(0) <= '1';
