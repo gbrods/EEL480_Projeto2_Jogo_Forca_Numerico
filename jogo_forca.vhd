@@ -34,11 +34,11 @@ BEGIN
 
     IF V_BT(0) = '0' THEN 
         current_state <= start_game; -- Estado inicial
-	 
-	ELSIF rising_edge(G_CLOCK_50) THEN        
+     
+    ELSIF rising_edge(G_CLOCK_50) THEN        
         current_state <= next_state; -- Mudança de estado	 	
 
-	END IF;
+    END IF;
 END PROCESS;
 
 --- Fim do processo
@@ -50,64 +50,64 @@ END PROCESS;
 PROCESS(current_state, dificuldade, acerto, erro, V_SW, vidas)
 BEGIN
 
-	CASE current_state IS
+    CASE current_state IS
         
         WHEN start_game => -- Sinais são zerados ao iniciar ou reiniciar o jogo
             acerto <= "000000";
             erro <= "0000";
             win <= '0';
-			lose <= '0';
+            lose <= '0';
 
             IF (V_SW(11) = '1') THEN -- Escolhendo a palavra secreta fácil: 024689
-				dificuldade <= "01";
-				vidas <= "11";
-				next_state <= waiting_word;
+                dificuldade <= "01";
+                vidas <= "11";
+                next_state <= waiting_word;
             
             ELSIF (V_SW(12) = '1') THEN -- Escolhendo a palavra secreta difícil: 751394
                 dificuldade <= "10";
-				vidas <= "11";
-				next_state <= waiting_word;
+                vidas <= "11";
+                next_state <= waiting_word;
             
-			ELSE
-			    next_state <= start_game;
-			
-			END IF;
+            ELSE
+                next_state <= start_game;
+            
+            END IF;
         
-		WHEN waiting_word =>
-		    IF (vidas = "00") THEN -- Se as vidas acabarem:
+        WHEN waiting_word =>
+            IF (vidas = "00") THEN -- Se as vidas acabarem:
                 next_state <= game_over;
-			        
+                    
             ELSIF (acerto = "111111") THEN -- Se todas as palavras foram descobertas:
                 next_state <= win_game;				        
-			   
-			ELSE
-		        -- Modo fácil: 024689
+               
+            ELSE
+                -- Modo fácil: 024689
                 IF (dificuldade = "01") THEN
                 
-			        IF (V_SW(0) = '1' AND acerto(5) = '0') THEN 
-			            acerto(5) <= '1';			        
-			            next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(2) = '1' AND acerto(4) = '0') THEN
-	                    acerto(4) <= '1';		    
-						next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(4) = '1' AND acerto(3) = '0') THEN
+                    IF (V_SW(0) = '1' AND acerto(5) = '0') THEN 
+                        acerto(5) <= '1';			        
+                        next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(2) = '1' AND acerto(4) = '0') THEN
+                        acerto(4) <= '1';		    
+                              next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(4) = '1' AND acerto(3) = '0') THEN
                         acerto(3) <= '1';			        
-			            next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(6) = '1' AND acerto(2) = '0') THEN
+                          next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(6) = '1' AND acerto(2) = '0') THEN
                         acerto(2) <= '1';			    
-			            next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(8) = '1' AND acerto(1) = '0') THEN
+                          next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(8) = '1' AND acerto(1) = '0') THEN
                         acerto(1) <= '1';			        
-			            next_state <= waiting_word;	
-			        
-			        ELSIF (V_SW(9) = '1' AND acerto(0) = '0') THEN
+                          next_state <= waiting_word;	
+                    
+                    ELSIF (V_SW(9) = '1' AND acerto(0) = '0') THEN
                         acerto(0) <= '1';			    
-			            next_state <= waiting_word;				        
-			        
+                          next_state <= waiting_word;				        
+                    
                     ELSIF (V_SW(1) = '1' AND erro(0) = '0') THEN
                         erro(0) <= '1';
                         vidas <= vidas - 1;
@@ -135,30 +135,30 @@ BEGIN
                 -- Modo difícil: 751394
                 ELSIF (dificuldade = "10") THEN
                 
-			        IF (V_SW(7) = '1' AND acerto(5) = '0') THEN
-			            acerto(5) <= '1';			        
-			            next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(5) = '1' AND acerto(4) = '0') THEN
-	                    acerto(4) <= '1';		    
-			            next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(1) = '1' AND acerto(3) = '0') THEN
-                        acerto(3) <= '1';			        
-			            next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(3) = '1' AND acerto(2) = '0') THEN
+                    IF (V_SW(7) = '1' AND acerto(5) = '0') THEN
+                        acerto(5) <= '1';			        
+                        next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(5) = '1' AND acerto(4) = '0') THEN
+                        acerto(4) <= '1';		    
+                          next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(1) = '1' AND acerto(3) = '0') THEN
+                       acerto(3) <= '1';			        
+                          next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(3) = '1' AND acerto(2) = '0') THEN
                        acerto(2) <= '1';			    
-			           next_state <= waiting_word;
-			        
-			        ELSIF (V_SW(9) = '1' AND acerto(1) = '0') THEN
+                          next_state <= waiting_word;
+                    
+                    ELSIF (V_SW(9) = '1' AND acerto(1) = '0') THEN
                        acerto(1) <= '1';			        
-			           next_state <= waiting_word;	
-			        
-			        ELSIF (V_SW(4) = '1' AND acerto(0) = '0') THEN
+                          next_state <= waiting_word;	
+                    
+                    ELSIF (V_SW(4) = '1' AND acerto(0) = '0') THEN
                        acerto(0) <= '1';			    
-			           next_state <= waiting_word;	  
-			            
+                          next_state <= waiting_word;	  
+                        
                     ELSIF (V_SW(0) = '1' AND erro(0) = '0') THEN
                         erro(0) <= '1';
                         vidas <= vidas - 1;
@@ -181,7 +181,7 @@ BEGIN
                         
                     ELSE
                         next_state <= waiting_word;
-			        END IF;
+                    END IF;
                 END IF;
             END IF;
         
