@@ -18,15 +18,11 @@ END jogo_forca;
 ARCHITECTURE behavioral OF jogo_forca IS
 
 TYPE states IS (start_game, waiting_word, win_game, game_over);
-
 SIGNAL current_state, next_state : states;
 
 SIGNAL acerto : STD_LOGIC_VECTOR(5 DOWNTO 0);
-
 SIGNAL erro : STD_LOGIC_VECTOR(3 DOWNTO 0);
-
 SIGNAL dificuldade, vidas : STD_LOGIC_VECTOR(1 DOWNTO 0);
-
 SIGNAL win, lose : STD_LOGIC;
 
 BEGIN
@@ -94,7 +90,7 @@ BEGIN
 			        
 			        ELSIF (V_SW(2) = '1' AND acerto(4) = '0') THEN
 	                    acerto(4) <= '1';		    
-			            next_state <= waiting_word;
+						next_state <= waiting_word;
 			        
 			        ELSIF (V_SW(4) = '1' AND acerto(3) = '0') THEN
                         acerto(3) <= '1';			        
@@ -152,16 +148,16 @@ BEGIN
 			            next_state <= waiting_word;
 			        
 			        ELSIF (V_SW(3) = '1' AND acerto(2) = '0') THEN
-                        acerto(2) <= '1';			    
-			            next_state <= waiting_word;
+                       acerto(2) <= '1';			    
+			           next_state <= waiting_word;
 			        
 			        ELSIF (V_SW(9) = '1' AND acerto(1) = '0') THEN
-                        acerto(1) <= '1';			        
-			            next_state <= waiting_word;	
+                       acerto(1) <= '1';			        
+			           next_state <= waiting_word;	
 			        
 			        ELSIF (V_SW(4) = '1' AND acerto(0) = '0') THEN
-                        acerto(0) <= '1';			    
-			            next_state <= waiting_word;	  
+                       acerto(0) <= '1';			    
+			           next_state <= waiting_word;	  
 			            
                     ELSIF (V_SW(0) = '1' AND erro(0) = '0') THEN
                         erro(0) <= '1';
